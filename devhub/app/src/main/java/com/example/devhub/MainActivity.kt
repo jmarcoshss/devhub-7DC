@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,14 +43,56 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Usuario(){
-    Column {
-        Image(painter = painterResource(id = R.drawable._18298414),
-            contentDescription = "foto do perfil" )
-        Text(text = "jmarcoshss")
-        Text(text = "João Marcos Herique dos Santos Santana")
-        Text(text = "Dev mobile em formação")
+    val boxHeight = remember {
+        150.dp
     }
+    val imageHeight = remember {
+        boxHeight
+    }
+    Column {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    Color(R.color.dark_blue)
+                )
+                .height(boxHeight)
+        ) {
+            Image(
+                painterResource(id = R.drawable._18298414),
+                contentDescription = "foto de perfil",
+                modifier = Modifier
+                    .offset(y = imageHeight / 2)
+                    .size(imageHeight)
+                    .align(Alignment.BottomCenter)
+                    .clip(CircleShape),
+            )
+        }
+        Spacer(modifier = Modifier.height(imageHeight / 2))
+        Column(
+            Modifier
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                "jmarcoshss",
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                "João Marcos Henrique dos Santos Santana",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                "dev mobile em formação"
+            )
+        }
+    }
+
 }
+
+
 
 @Preview(showBackground = true)
 @Composable
