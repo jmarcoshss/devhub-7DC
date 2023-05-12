@@ -16,12 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberImagePainter
 import com.example.devhub.ui.theme.DevhubTheme
 
 class MainActivity : ComponentActivity() {
@@ -49,6 +48,8 @@ fun Usuario(){
     val imageHeight = remember {
         boxHeight
     }
+    val painter  =
+        rememberImagePainter(data = "https://avatars.githubusercontent.com/u/118298414?v=4")
     Column {
         Box(
             modifier = Modifier
@@ -59,7 +60,8 @@ fun Usuario(){
                 .height(boxHeight)
         ) {
             Image(
-                painterResource(id = R.drawable._18298414),
+                painter = painter ,
+//                painterResource(id = R.drawable._18298414),
                 contentDescription = "foto de perfil",
                 modifier = Modifier
                     .offset(y = imageHeight / 2)
