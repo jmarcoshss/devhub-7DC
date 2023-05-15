@@ -1,6 +1,7 @@
 package com.example.devhub
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -20,12 +21,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
 import coil.compose.rememberImagePainter
 import com.example.devhub.ui.theme.DevhubTheme
+import com.example.devhub.webclient.RetrofitInitializer
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lifecycleScope.launch {
+            RetrofitInitializer().gitHubService.findProfileBy("jmarcoshss")
+                .let {
+                    Log.i("MainActivity", "onCreate: $it")
+                }
+        }
         setContent {
             DevhubTheme {
                 // A surface container using the 'background' color from the theme
@@ -33,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Usuario()
+                    TelaDeUsuario()
                 }
             }
         }
@@ -41,7 +51,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Usuario(){
+fun TelaDeUsuario(){
     val boxHeight = remember {
         150.dp
     }
@@ -100,6 +110,6 @@ fun Usuario(){
 @Composable
 fun DefaultPreview() {
     DevhubTheme {
-        Usuario()
+        TelaDeUsuario()
     }
 }
